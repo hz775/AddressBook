@@ -7,3 +7,5 @@ if __name__ == "__main__":
 
     # UC2: input from user and add
     book1.add_contact() 
+    # UC3 edit contact
+    book1.edit_contact("hemanth")
