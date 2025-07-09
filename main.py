@@ -1,4 +1,9 @@
+from addressbook import AddressBook
 from contact import Contact
 
-contact1=Contact("Hemanth",".A.K","No 9 GMD Nagar","Chennai","TamilNadu",60003,8080809090,"akhe123@gmail.com")
-contact1.display_contact()
+if __name__ == "__main__":
+    # UC1: Create AddressBook object
+    book1 = AddressBook()
+
+    # UC2: input from user and add
+    book1.add_contact() 
