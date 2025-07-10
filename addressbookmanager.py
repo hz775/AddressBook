@@ -42,3 +42,34 @@ class AddressBookManager:
                 case "2": book.view_contacts()
                 case "3": break
                 case _: print("Invalid choice.")
+
+    def search_person_by_city_or_state(self):
+        if not self.books:
+            print("No Address Books available.")
+            return
+
+        search_field = input("Would you like to search by 'city' or 'state'?: ").strip().lower()
+        if search_field not in ("city", "state"):
+            print("Invalid choice. Please enter either 'city' or 'state'.")
+            return
+
+        value = input(f"Enter the {search_field.title()} name to search for: ").strip().lower()
+        found = False
+
+        for book_name, book in self.books.items():
+            matching_contacts = [
+                contact for contact in book.contacts
+                if (search_field == "city" and contact.city.lower() == value) or
+                (search_field == "state" and contact.state.lower() == value)
+            ]
+
+            if matching_contacts:
+                print(f"\n Found in Address Book: {book_name}")
+                for contact in matching_contacts:
+                    contact.display_contact()
+                    print("-" * 30)
+                found = True
+
+        if not found:
+            print(f"\nNo contacts found in {search_field.title()} '{value.title()}'.")
+
