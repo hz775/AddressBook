@@ -61,6 +61,14 @@ class AddressBook:
             if cont != "y":
                 break
 
+    def view_contacts(self):
+        if not self.contacts:
+            print("No contacts added")
+        else:
+            print("Contacts List: ")
+            for contact in self.contacts:
+                contact.display_contact()
+
                         
 
 
