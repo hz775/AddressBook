@@ -8,10 +8,15 @@ class AddressBook:
         print("\nEnter your contact details: ")
         fields = ["First Name", "Last Name", "Address", "City", "State", "Zip Code", "Phone Number", "Email"]
         user_input = [input(f"{field}: ") for field in fields]
+        first_name, last_name = user_input[0], user_input[1]
+
+        if any(c.first_name.lower() == first_name.lower() and c.last_name.lower() == last_name.lower() for c in self.contacts):
+            print("\n Duplicate contact. A person with this name already exists.")
+            return
+
 
         contact = Contact(*user_input)
         self.contacts.append(contact)
-
         print("Contact added successfully")
 
     def edit_contact(self, name_to_edit):
