@@ -43,7 +43,11 @@ if __name__ == "__main__":
     # book1.add_contact()
     # book1.add_contact()
 
+    # usecase8:search by city or state
     manager.search_person_by_city_or_state()
+
+    # usecase9:view by city or state
+    manager.view_persons_by_city_or_state()
     
 
 

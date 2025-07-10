@@ -1,4 +1,5 @@
 from addressbook import AddressBook
+from collections import defaultdict
 
 class AddressBookManager:
     def __init__(self):
@@ -73,3 +74,35 @@ class AddressBookManager:
         if not found:
             print(f"\nNo contacts found in {search_field.title()} '{value.title()}'.")
 
+    
+
+    def view_persons_by_city_or_state(self):
+        if not self.books:
+            print("No Address Books available.")
+            return
+
+        # Create two dictionaries to map City and State to list of Contacts
+        city_dict = defaultdict(list)
+        state_dict = defaultdict(list)
+
+
+        for book_name, book in self.books.items():
+            for contact in book.contacts:
+                city_dict[contact.city].append(contact)
+                state_dict[contact.state].append(contact)
+
+        option = input("View persons by 'city' or 'state'?: ").strip().lower()
+        if option == "city":
+            for city, contacts in city_dict.items():
+                print(f"\nCity: {city}")
+                for contact in contacts:
+                    contact.display_contact()
+                    print("-" * 30)
+        elif option == "state":
+            for state, contacts in state_dict.items():
+                print(f"\nState: {state}")
+                for contact in contacts:
+                    contact.display_contact()
+                    print("-" * 30)
+        else:
+            print("Invalid choice. Please enter either 'city' or 'state'.")
