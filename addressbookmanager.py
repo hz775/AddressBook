@@ -106,3 +106,27 @@ class AddressBookManager:
                     print("-" * 30)
         else:
             print("Invalid choice. Please enter either 'city' or 'state'.")
+
+    def count_persons_by_city_or_state(self):
+        option = input("Count persons by 'city' or 'state'?: ").strip().lower()
+        if option not in ("city", "state"):
+            print("Invalid choice. Please enter 'city' or 'state'.")
+            return
+
+        name = input(f"Enter the {option.title()} name: ").strip()
+
+        persons = [
+            contact for book in self.books.values() for contact in book.contacts
+            if (option == "city" and contact.city.lower() == name.lower()) or
+            (option == "state" and contact.state.lower() == name.lower())
+        ]
+
+        if not persons:
+            print(f"No persons found in {option.title()} '{name.title()}'.")
+            return
+
+        print(f"\nTotal number of persons in {option.title()} '{name.title()}': {len(persons)}\n")
+
+        print("Contact Numbers:")
+        for person in persons:
+            print(f"{person.first_name} {person.last_name} - {person.phone_number}")
