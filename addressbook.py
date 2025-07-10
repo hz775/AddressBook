@@ -32,7 +32,29 @@ class AddressBook:
                 return
         
         print("Contact not found.")
-                
+    
+    def display_all_contacts(self):
+        if not self.contacts:
+            print("No contacts to display.\n")
+        else:
+            print("\nAll Contacts:")
+            for contact in self.contacts:
+                contact.display_contact()
+                print("-" * 30)
+
+    def delete_contact(self):
+        print("\nDelete Contact:")
+        first_name_to_delete = input("Enter First Name: ")
+        last_name_to_delete = input("Enter Last Name: ")
+
+        for person in self.contacts:
+            if person.first_name == first_name_to_delete and person.last_name == last_name_to_delete:
+                self.contacts.remove(person)
+                print(" Contact deleted successfully.")
+                return
+        print(" Contact not found.")
+
+                        
 
 
 
