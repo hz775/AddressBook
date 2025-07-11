@@ -74,6 +74,18 @@ class AddressBook:
             for contact in self.contacts:
                 contact.display_contact()
 
+    def sort_contacts_by_name(self):
+        if not self.contacts:
+            print("No contacts added")
+            return
+
+        sorted_contacts = sorted(self.contacts, key=lambda c: (c.first_name.lower() + " " + c.last_name.lower()))
+
+        print("\nContacts sorted alphabetically by name:\n")
+        for contact in sorted_contacts:
+            contact.display_contact()
+            print("-" * 30)
+
     
 
                         

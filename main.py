@@ -6,7 +6,7 @@ if __name__ == "__main__":
     book1 = AddressBook()
 
     # UC2:adding contact
-    # book1.add_contact()
+    book1.add_contact()
 
 
     # UC3 edit contact
@@ -16,28 +16,28 @@ if __name__ == "__main__":
     # book1.delete_contact()
 
     # UC5 adding multiple contact
-    # book1.add_multiple_contacts()
-    # book1.display_all_contacts()
+    book1.add_multiple_contacts()
+    book1.display_all_contacts()
 
     # UC6 multiple address book
     manager=AddressBookManager()
 
-    while True:
-        print("\n=== Address Book System ===")
-        print("1. Create New Address Book")
-        print("2. Select Existing Address Book")
-        print("3. Exit")
-        choice = input("Enter your choice: ")
+    # while True:
+    #     print("\n=== Address Book System ===")
+    #     print("1. Create New Address Book")
+    #     print("2. Select Existing Address Book")
+    #     print("3. Exit")
+    #     choice = input("Enter your choice: ")
 
-        if choice == '1':
-            manager.create_book()
-        elif choice == '2':
-             manager.use_book()
-        elif choice == '3':
-            print("Exiting Address Book System.")
-            break
-        else:
-            print("Invalid choice. Try again.")
+    #     if choice == '1':
+    #         manager.create_book()
+    #     elif choice == '2':
+    #          manager.use_book()
+    #     elif choice == '3':
+    #         print("Exiting Address Book System.")
+    #         break
+    #     else:
+    #         print("Invalid choice. Try again.")
 
     # usecase7: duplicate entry checking
     # book1.add_contact()
@@ -50,7 +50,10 @@ if __name__ == "__main__":
     # manager.view_persons_by_city_or_state()
 
     # usecase10:get count by city or state
-    manager.count_persons_by_city_or_state()
+    # manager.count_persons_by_city_or_state()
+
+    # usecase11: sort and display contacts alphabetically by name
+    book1.sort_contacts_by_name()
     
 
 
