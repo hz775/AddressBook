@@ -65,9 +65,13 @@ if __name__ == "__main__":
     # book1.file_io(filename, action="load")
     # book1.view_contacts()
 
-    filename = "contacts.csv"
-    book1.csv_io(filename)   
-    book1.csv_io(filename)   
+    # filename = "contacts.csv"
+    # book1.csv_io(filename)   
+    # book1.csv_io(filename)   
+    # book1.view_contacts()
+
+    filename = input("Enter filename (e.g., contacts.json): ")
+    book1.json_io(filename)
     book1.view_contacts()
     
 

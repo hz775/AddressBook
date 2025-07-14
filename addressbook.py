@@ -1,6 +1,7 @@
 from contact import Contact
 import csv
 import os
+import json
 
 class AddressBook:
     def __init__(self): 
@@ -110,7 +111,7 @@ class AddressBook:
             contact.display_contact()
 
 
-    def file_io(self, filename: str, action: str = "save") -> None:
+    def file_io(self, filename: str, action: str = "save"):
         action = action.lower()
         try:
             if action == "save":
@@ -146,7 +147,6 @@ class AddressBook:
     
     def csv_io(self, filename: str):
         if os.path.exists(filename) and os.path.getsize(filename) > 0:
-            # LOAD
             try:
                 with open(filename, "r", newline="", encoding="utf-8") as f:
                     reader = csv.reader(f)
@@ -172,4 +172,57 @@ class AddressBook:
             except Exception as e:
                 print(f" Error saving CSV: {e}")
 
+    def json_io(self, filename: str):
+        mode = input("Type 'save' to write or 'load' to read contacts: ").strip().lower()
 
+        try:
+            if mode == "save":
+                data = [
+                    {
+                        "first_name": c.first_name,
+                        "last_name": c.last_name,
+                        "address": c.address,
+                        "city": c.city,
+                        "state": c.state,
+                        "zip_code": c.zip_code,
+                        "phone_number": c.phone_number,
+                        "email": c.email,
+                    }
+                    for c in self.contacts
+                ]
+                with open(filename, "w", encoding="utf-8") as file:
+                    json.dump(data, file, indent=4)
+
+                print(f"Address book saved successfully to '{filename}' (JSON)")
+
+            elif mode == "load":
+                with open(filename, "r", encoding="utf-8") as file:
+                    data = json.load(file)
+
+                self.contacts.clear()
+                for d in data:
+                    self.contacts.append(
+                        Contact(
+                            d["first_name"],
+                            d["last_name"],
+                            d["address"],
+                            d["city"],
+                            d["state"],
+                            d["zip_code"],
+                            d["phone_number"],
+                            d["email"],
+                        )
+                    )
+
+                print(f"Address book loaded successfully from '{filename}' "
+                      f"({len(self.contacts)} contacts)")
+                for c in self.contacts:
+                    c.display_contact()
+
+            else:
+                print("Invalid choice. Please type 'save' or 'load'.")
+
+        except FileNotFoundError:
+            print(f"File '{filename}' not found.")
+        except Exception as e:
+            print(f"Error during JSON I/O: {e}")
