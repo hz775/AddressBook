@@ -53,7 +53,10 @@ if __name__ == "__main__":
     # manager.count_persons_by_city_or_state()
 
     # usecase11: sort and display contacts alphabetically by name
-    book1.sort_contacts_by_name()
+    # book1.sort_contacts_by_name()
+
+    # usecase12: sort person by city,state or zipcode
+    book1.sort_contacts_by_field()
     
 
 
