@@ -107,9 +107,43 @@ class AddressBook:
         for contact in sorted_contacts:
             contact.display_contact()
 
-    
 
-                        
+    def file_io(self, filename: str, action: str = "save") -> None:
+        action = action.lower()
+        try:
+            if action == "save":
+                with open(filename, "w", encoding="utf-8") as file:
+                    for c in self.contacts:
+                        file.write(
+                            f"{c.first_name}|{c.last_name}|{c.address}|"
+                            f"{c.city}|{c.state}|{c.zip_code}|"
+                            f"{c.phone_number}|{c.email}\n"
+                        )
+                print(f" Address book saved to '{filename}'")
+
+            elif action == "load":
+                with open(filename, "r", encoding="utf-8") as file:
+                    self.contacts.clear()
+                    for line in file:
+                        parts = line.rstrip("\n").split("|")
+                        if len(parts) == 8:
+                            self.contacts.append(Contact(*parts))
+                        else:
+                            print(f"Skipping malformed line: {line.strip()}")
+                print(f" Address book loaded from '{filename}' "
+                      f"({len(self.contacts)} contacts)")
+
+            else:
+                print(" Invalid action. Use 'save' or 'load'.")
+
+        except FileNotFoundError:
+            print(f" File '{filename}' not found.")
+        except Exception as e:
+            print(f" Error during file I/O: {e}")
+
+        
+
+                            
 
 
 

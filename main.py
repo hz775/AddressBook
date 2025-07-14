@@ -56,7 +56,14 @@ if __name__ == "__main__":
     # book1.sort_contacts_by_name()
 
     # usecase12: sort person by city,state or zipcode
-    book1.sort_contacts_by_field()
+    # book1.sort_contacts_by_field()
+
+    # usecase13
+    filename = input("Enter filename: ")
+
+    book1.file_io(filename, action="save")
+    book1.file_io(filename, action="load")
+    book1.view_contacts()
     
 
 
