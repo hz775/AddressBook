@@ -59,10 +59,15 @@ if __name__ == "__main__":
     # book1.sort_contacts_by_field()
 
     # usecase13
-    filename = input("Enter filename: ")
+    # filename = input("Enter filename: ")
 
-    book1.file_io(filename, action="save")
-    book1.file_io(filename, action="load")
+    # book1.file_io(filename, action="save")
+    # book1.file_io(filename, action="load")
+    # book1.view_contacts()
+
+    filename = "contacts.csv"
+    book1.csv_io(filename)   
+    book1.csv_io(filename)   
     book1.view_contacts()
     
 

@@ -1,4 +1,6 @@
 from contact import Contact
+import csv
+import os
 
 class AddressBook:
     def __init__(self): 
@@ -141,11 +143,33 @@ class AddressBook:
         except Exception as e:
             print(f" Error during file I/O: {e}")
 
-        
-
-                            
-
-
-
+    
+    def csv_io(self, filename: str):
+        if os.path.exists(filename) and os.path.getsize(filename) > 0:
+            # LOAD
+            try:
+                with open(filename, "r", newline="", encoding="utf-8") as f:
+                    reader = csv.reader(f)
+                    next(reader, None)  
+                    self.contacts = [Contact(*row) for row in reader if len(row) == 8]
+                print(f" Loaded {len(self.contacts)} contacts from '{filename}'")
+            except Exception as e:
+                print(f" Error reading CSV: {e}")
+        else:
+            try:
+                with open(filename, "w", newline="", encoding="utf-8") as f:
+                    writer = csv.writer(f)
+                    writer.writerow(
+                        ["First Name", "Last Name", "Address", "City",
+                         "State", "Zip Code", "Phone Number", "Email"]
+                    )
+                    for c in self.contacts:
+                        writer.writerow([
+                            c.first_name, c.last_name, c.address, c.city,
+                            c.state, c.zip_code, c.phone_number, c.email
+                        ])
+                print(f" Saved {len(self.contacts)} contacts to '{filename}'")
+            except Exception as e:
+                print(f" Error saving CSV: {e}")
 
 
